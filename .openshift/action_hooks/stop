@@ -5,4 +5,3 @@ if [[ -z "$OPENSHIFT_INTERNAL_PORT" ]]; then export OPENSHIFT_INTERNAL_PORT="$OP
 
 kill $(cat ${OPENSHIFT_DATA_DIR}run.pid)
 
-#wget http://${OPENSHIFT_INTERNAL_IP}:${OPENSHIFT_INTERNAL_PORT}?action=stop
