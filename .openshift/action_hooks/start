@@ -1,5 +1,16 @@
 #!/bin/bash
 # The logic to start up your application should be put in this
 # script. The application will work only if it binds to
-# $OPENSHIFT_DIY_IP:8080
-nohup $OPENSHIFT_REPO_DIR/diy/testrubyserver.rb $OPENSHIFT_DIY_IP $OPENSHIFT_REPO_DIR/diy |& /usr/bin/logshifter -tag diy &
+# $OPENSHIFT_INTERNAL_IP:8080
+
+cd $OPENSHIFT_REPO_DIR
+
+if [[ -z "$OPENSHIFT_INTERNAL_IP" ]]; then export OPENSHIFT_INTERNAL_IP="$OPENSHIFT_DIY_IP"; fi
+if [[ -z "$OPENSHIFT_INTERNAL_PORT" ]]; then export OPENSHIFT_INTERNAL_PORT="$OPENSHIFT_DIY_PORT"; fi
+
+export JAVA_HOME="${OPENSHIFT_DATA_DIR}jdk1.8.0_20"
+export JDK8_PATH="${OPENSHIFT_DATA_DIR}jdk1.8.0_20/bin"
+export PATH=$JDK8_PATH:$PATH
+
+nohup java -Djava.io.tmpdir=${OPENSHIFT_DATA_DIR} -jar lib/server-jar-with-dependencies.jar > ${OPENSHIFT_DIY_LOG_DIR}/proxy-server.log 2>&1 & 
+echo $! > ${OPENSHIFT_DATA_DIR}run.pid
