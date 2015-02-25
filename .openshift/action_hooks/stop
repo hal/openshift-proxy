@@ -3,5 +3,6 @@
 if [[ -z "$OPENSHIFT_INTERNAL_IP" ]]; then export OPENSHIFT_INTERNAL_IP="$OPENSHIFT_DIY_IP"; fi
 if [[ -z "$OPENSHIFT_INTERNAL_PORT" ]]; then export OPENSHIFT_INTERNAL_PORT="$OPENSHIFT_DIY_PORT"; fi
 
-kill $(cat ${OPENSHIFT_DATA_DIR}run.pid)
-
+if [ -f ${OPENSHIFT_DATA_DIR}run.pid ]; then
+    kill $(cat ${OPENSHIFT_DATA_DIR}run.pid)
+fi
