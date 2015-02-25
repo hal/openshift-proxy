@@ -8,8 +8,8 @@ cd $OPENSHIFT_REPO_DIR
 if [[ -z "$OPENSHIFT_INTERNAL_IP" ]]; then export OPENSHIFT_INTERNAL_IP="$OPENSHIFT_DIY_IP"; fi
 if [[ -z "$OPENSHIFT_INTERNAL_PORT" ]]; then export OPENSHIFT_INTERNAL_PORT="$OPENSHIFT_DIY_PORT"; fi
 
-export JAVA_HOME="${OPENSHIFT_DATA_DIR}jdk1.8.0_20"
-export JDK8_PATH="${OPENSHIFT_DATA_DIR}jdk1.8.0_20/bin"
+export JAVA_HOME="${OPENSHIFT_DATA_DIR}/jdk/jdk1.8.0_05"
+export JDK8_PATH="${JAVA_HOME}/bin"
 export PATH=$JDK8_PATH:$PATH
 
 nohup java -Djava.io.tmpdir=${OPENSHIFT_DATA_DIR} -jar lib/server-jar-with-dependencies.jar > ${OPENSHIFT_DIY_LOG_DIR}/proxy-server.log 2>&1 & 
