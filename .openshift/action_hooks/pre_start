@@ -1,5 +1,4 @@
-
-#!/bin/sh
+#!/bin/bash -eu
 
 function setup-jdk-8() {
   echo "Downloading and Configuring Java 8"
